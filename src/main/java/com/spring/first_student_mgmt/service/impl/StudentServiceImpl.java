@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import com.spring.first_student_mgmt.dto.StudentDto;
 import com.spring.first_student_mgmt.entity.Student;
+import com.spring.first_student_mgmt.exception.ResourceNotFoundException;
 import com.spring.first_student_mgmt.mapper.StudentMapper;
 import com.spring.first_student_mgmt.repository.StudentRepository;
 import com.spring.first_student_mgmt.service.StudentService;
@@ -24,6 +25,14 @@ public class StudentServiceImpl implements StudentService{
         Student savedStudent = studentRepository.save(student);
         // return dto
         return StudentMapper.mapToStudentDto(savedStudent);
+    }
+
+    @Override
+    public StudentDto getStudentById(Long studentId) {
+        Student student = studentRepository.findById(studentId)
+            .orElseThrow(() -> 
+                new ResourceNotFoundException("Student not exist with given id: " + studentId));
+        return StudentMapper.mapToStudentDto(student);
     }
 
 }
