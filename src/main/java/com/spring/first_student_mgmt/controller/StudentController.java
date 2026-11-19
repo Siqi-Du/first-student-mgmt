@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -45,5 +46,13 @@ public class StudentController {
     public ResponseEntity<List<StudentDto>> getAllStudents(){
         List<StudentDto> students = studentService.getAllStudents();
         return ResponseEntity.ok(students);
+    }
+
+    //build update student API
+    @PutMapping("{id}")
+    public ResponseEntity<StudentDto> updateStudent(@PathVariable("id") Long studentId, 
+                                                    @RequestBody StudentDto studentDto){ //extract request body json and convert into a dto java object
+        StudentDto updatedStudentDto = studentService.updateStudent(studentId, studentDto);
+        return ResponseEntity.ok(updatedStudentDto);
     }
 }
