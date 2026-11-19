@@ -1,5 +1,8 @@
 package com.spring.first_student_mgmt.controller;
 
+import java.util.List;
+
+import org.apache.catalina.connector.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,5 +38,12 @@ public class StudentController {
         return ResponseEntity.ok(studentDto); // A shortcut for creating a ResponseEntity with the given body and the
                                               // status set to OK.
 
+    }
+
+    //build get all students REST API
+    @GetMapping 
+    public ResponseEntity<List<StudentDto>> getAllStudents(){
+        List<StudentDto> students = studentService.getAllStudents();
+        return ResponseEntity.ok(students);
     }
 }

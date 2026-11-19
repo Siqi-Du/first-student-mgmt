@@ -1,5 +1,9 @@
 package com.spring.first_student_mgmt.service.impl;
 
+import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
 import org.springframework.stereotype.Service;
 
 import com.spring.first_student_mgmt.dto.StudentDto;
@@ -35,4 +39,10 @@ public class StudentServiceImpl implements StudentService{
         return StudentMapper.mapToStudentDto(student);
     }
 
+    @Override
+    public List<StudentDto> getAllStudents() {
+        List<Student> students = studentRepository.findAll();
+        return students.stream().map((student) -> StudentMapper.mapToStudentDto(student)) 
+                .collect(Collectors.toList()); //stream API with collectors
+    }
 }
