@@ -19,7 +19,7 @@ import lombok.Setter;
 @Table(name = "students")
 public class Student {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //auto increment the PK
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // @GeneratedValue: specifies generation strategy for PK: auto increment the PK
     private long id;
 
     @Column (name = "first_name") // if not add this: default column name is field name:firstName
