@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter 
 @NoArgsConstructor 
 @AllArgsConstructor 
-public class StudentDto {
+public class StudentDto { // post request body need to match the field names!!!!!
     private Long id;
     private String firstName;
     private String lastName;
