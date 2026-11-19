@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.catalina.connector.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -54,5 +55,12 @@ public class StudentController {
                                                     @RequestBody StudentDto studentDto){ //extract request body json and convert into a dto java object
         StudentDto updatedStudentDto = studentService.updateStudent(studentId, studentDto);
         return ResponseEntity.ok(updatedStudentDto);
+    }
+
+    //build delete student API
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deleteStudent(@PathVariable("id") Long studentId){
+        studentService.deleteStudent(studentId);
+        return ResponseEntity.ok("Student deleted successfully.");
     }
 }

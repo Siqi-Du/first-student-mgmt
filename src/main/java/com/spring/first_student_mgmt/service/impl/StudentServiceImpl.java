@@ -57,4 +57,11 @@ public class StudentServiceImpl implements StudentService{
         Student updatedStudent = studentRepository.save(student); //perform both save and update operation
         return StudentMapper.mapToStudentDto(updatedStudent);
     }
+
+    @Override
+    public void deleteStudent(Long studentId) {
+        Student student = studentRepository.findById(studentId).orElseThrow(
+                () -> new ResourceNotFoundException("Student not exist with given id" + studentId));
+        studentRepository.deleteById(studentId);
+    }
 }
