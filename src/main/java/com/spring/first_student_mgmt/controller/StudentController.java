@@ -2,6 +2,8 @@ package com.spring.first_student_mgmt.controller;
 
 import java.util.List;
 
+import jakarta.validation.Valid;
+
 import org.apache.catalina.connector.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +31,7 @@ public class StudentController {
     // build Add Student REST API
     // ResponseEntity: generic class(need to pass a type)
     @PostMapping //@PostMapping: map HTTP POST to this method; @RequestBody extract request body and map to the dto parameter obj
-    public ResponseEntity<StudentDto> createStudent(@RequestBody StudentDto studentDto){
+    public ResponseEntity<StudentDto> createStudent(@Valid @RequestBody StudentDto studentDto){
         StudentDto savedStudent = studentService.createStudent(studentDto);
         return new ResponseEntity<>(savedStudent, HttpStatus.CREATED); //201: created
     }
@@ -56,7 +58,7 @@ public class StudentController {
     //build update student API
     @PutMapping("{id}")
     public ResponseEntity<StudentDto> updateStudent(@PathVariable("id") Long studentId, 
-                                                    @RequestBody StudentDto studentDto){ //extract request body json and convert into a dto java object
+                                                    @Valid @RequestBody StudentDto studentDto){ //extract request body json and convert into a dto java object
         StudentDto updatedStudentDto = studentService.updateStudent(studentId, studentDto);
         return ResponseEntity.ok(updatedStudentDto);
     }
