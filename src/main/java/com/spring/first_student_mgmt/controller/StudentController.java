@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.first_student_mgmt.dto.StudentDto;
@@ -42,10 +43,13 @@ public class StudentController {
 
     }
 
-    //build get all students REST API
+    // Query students with an optional last-name filter
     @GetMapping 
-    public ResponseEntity<List<StudentDto>> getAllStudents(){
-        List<StudentDto> students = studentService.getAllStudents();
+    public ResponseEntity<List<StudentDto>> getStudents(
+            @RequestParam(name = "lastName", required = false) String lastName){
+        List<StudentDto> students = lastName == null
+                ? studentService.getAllStudents()
+                : studentService.getStudentsByLastName(lastName);
         return ResponseEntity.ok(students);
     }
 

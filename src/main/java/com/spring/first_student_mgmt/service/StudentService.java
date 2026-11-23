@@ -11,6 +11,8 @@ public interface StudentService {
 
     List<StudentDto> getAllStudents();
 
+    List<StudentDto> getStudentsByLastName(String lastName);
+
     StudentDto updateStudent(Long studentId, StudentDto updatedStudentDto);
 
     void deleteStudent(Long studentId);
